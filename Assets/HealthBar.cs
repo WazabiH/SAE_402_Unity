@@ -12,6 +12,6 @@ public class HealthBar : MonoBehaviour
     }
     public void SetHealth(int health) // indique à la barre de vie le nbr de point vie à afficher 
     {
-        slider?value = health;
+        slider.value = health;
     }
 }
