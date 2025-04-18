@@ -1,46 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; // Pour gérer les scènes
+using UnityEngine.SceneManagement; // Import pour charger des scènes (menu principal)
 
 public class PauseMenu : MonoBehaviour
 {
     public GameObject PausePanel;
-    private bool isPaused = false;
 
+    // Update est utilisé pour détecter la touche "Escape"
     void Update()
     {
-        // Détection de la touche Escape pour la pause
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)) // Vérifie si "Escape" est pressé
         {
-            if (isPaused)
+            if (PausePanel != null) // Vérifie que le panel est configuré
             {
-                Continue();
-            }
-            else
-            {
-                Pause();
+                if (PausePanel.activeSelf)
+                {
+                    Continue(); // Reprendre le jeu
+                }
+                else
+                {
+                    Pause(); // Mettre en pause
+                }
             }
         }
     }
 
     public void Pause()
     {
-        PausePanel.SetActive(true);
-        Time.timeScale = 0f;
-        isPaused = true;
+        if (PausePanel != null)
+        {
+            PausePanel.SetActive(true); // Affiche le menu pause
+            Time.timeScale = 0; // Met le jeu en pause
+        }
     }
 
     public void Continue()
     {
-        PausePanel.SetActive(false);
-        Time.timeScale = 1f;
-        isPaused = false;
+        if (PausePanel != null)
+        {
+            PausePanel.SetActive(false); // Cache le menu pause
+            Time.timeScale = 1; // Reprend le jeu
+        }
     }
 
-    public void ReturnToMainMenu()
+    public void LoadMainMenu()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu"); // Remplacez "MainMenu" par le nom de votre scène de menu principal
+        Time.timeScale = 1; // Reprend le temps avant de charger une nouvelle scène
+        SceneManager.LoadScene("MainMenu"); // Charge la scène du menu principal
     }
 }
