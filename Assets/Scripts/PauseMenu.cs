@@ -1,30 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; // Pour gérer les scènes
 
 public class PauseMenu : MonoBehaviour
 {
-   // public GameObject PausePanel;
+    public GameObject PausePanel;
+    private bool isPaused = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Update()
     {
-        
+        // Détection de la touche Escape pour la pause
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (isPaused)
+            {
+                Continue();
+            }
+            else
+            {
+                Pause();
+            }
+        }
     }
 
-    // Update is called once per frame
-    //void Update()
+    public void Pause()
     {
-        
+        PausePanel.SetActive(true);
+        Time.timeScale = 0f;
+        isPaused = true;
     }
 
-    //public void Pause () {
-        PausePanel.SetActive (true);
-        Time.timeScale = 0;
+    public void Continue()
+    {
+        PausePanel.SetActive(false);
+        Time.timeScale = 1f;
+        isPaused = false;
     }
 
-    //public void Continue () {
-        PausePanel.SetActive (false);
-        Time.timeScale = 1;
+    public void ReturnToMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu"); // Remplacez "MainMenu" par le nom de votre scène de menu principal
     }
 }
