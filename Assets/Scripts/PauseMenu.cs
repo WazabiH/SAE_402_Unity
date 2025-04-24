@@ -1,52 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; // Import pour charger des scènes (menu principal)
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject PausePanel;
+    public GameObject PausePanel; // Le panneau du menu pause
+    public BoolEventChannel OnTogglePauseEvent; // Référence au ScriptableObject BoolEventChannel
 
-    // Update est utilisé pour détecter la touche "Escape"
+    private bool isPaused = false; // État actuel du jeu (en pause ou non)
+
+    void Start()
+    {
+        // Désactiver le menu pause au démarrage
+        PausePanel.SetActive(false);
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) // Vérifie si "Escape" est pressé
+        // "Echap" pour activer/désactiver le menu pause
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (PausePanel != null) // Vérifie que le panel est configuré
-            {
-                if (PausePanel.activeSelf)
-                {
-                    Continue(); // Reprendre le jeu
-                }
-                else
-                {
-                    Pause(); // Mettre en pause
-                }
-            }
+            TogglePause();
         }
     }
 
-    public void Pause()
+    public void TogglePause()
     {
-        if (PausePanel != null)
+        isPaused = !isPaused; // Inverse l'état de pause
+        PausePanel.SetActive(isPaused); // Active ou désactive le menu pause
+        Time.timeScale = isPaused ? 0 : 1; // Met le temps en pause ou reprend
+
+        // Émettre l'événement via le ScriptableObject
+        if (OnTogglePauseEvent != null)
         {
-            PausePanel.SetActive(true); // Affiche le menu pause
-            Time.timeScale = 0; // Met le jeu en pause
+            OnTogglePauseEvent.Raise(isPaused); // Émet l'état de pause (true/false)
         }
     }
 
-    public void Continue()
+    public void ReloadLevel()
     {
-        if (PausePanel != null)
-        {
-            PausePanel.SetActive(false); // Cache le menu pause
-            Time.timeScale = 1; // Reprend le jeu
-        }
+        // Reprendre le temps avant de recharger la scène
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void LoadMainMenu()
     {
-        Time.timeScale = 1; // Reprend le temps avant de charger une nouvelle scène
-        SceneManager.LoadScene("MainMenu"); // Charge la scène du menu principal
+        // Reprendre le temps avant de charger la scène du menu principal
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenu");
     }
 }

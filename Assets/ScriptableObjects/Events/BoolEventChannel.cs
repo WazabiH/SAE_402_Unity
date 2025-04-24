@@ -12,3 +12,4 @@ public class BoolEventChannel : ScriptableObject
 			OnEventRaised.Invoke(value);
 	}
 }
+
