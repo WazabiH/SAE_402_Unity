@@ -762,7 +762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PausePanel: {fileID: 90802024}
-  OnTogglePauseEvent: {fileID: 0}
+  OnTogglePauseEvent: {fileID: 11400000, guid: b7a6509538354b74cbca707412cc0d24, type: 2}
 --- !u!4 &90947239 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 879175950831259082, guid: 4f5509a2dc47c8d458c27204332596dc, type: 3}
@@ -61752,7 +61752,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 90802029}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: TogglePause
+        m_MethodName: ResumeGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
