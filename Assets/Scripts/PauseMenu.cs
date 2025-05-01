@@ -10,13 +10,15 @@ public class PauseMenu : MonoBehaviour
 
     void Start()
     {
-        // Désactiver le menu pause au démarrage
+        // Assure que le jeu commence avec le menu pause désactivé et le temps actif
         PausePanel.SetActive(false);
+        Time.timeScale = 1;
+        isPaused = false;
     }
 
     void Update()
     {
-        // "Echap" pour activer/désactiver le menu pause
+        // Gestion de la touche "Escape" pour activer/désactiver le menu pause
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             TogglePause();
@@ -25,15 +27,37 @@ public class PauseMenu : MonoBehaviour
 
     public void TogglePause()
     {
-        isPaused = !isPaused; // Inverse l'état de pause
-        PausePanel.SetActive(isPaused); // Active ou désactive le menu pause
-        Time.timeScale = isPaused ? 0 : 1; // Met le temps en pause ou reprend
+        // Inverse l'état de pause
+        isPaused = !isPaused;
+
+        // Synchronise l'état du panneau et du temps
+        PausePanel.SetActive(isPaused);
+        Time.timeScale = isPaused ? 0 : 1;
 
         // Émettre l'événement via le ScriptableObject
         if (OnTogglePauseEvent != null)
         {
-            OnTogglePauseEvent.Raise(isPaused); // Émet l'état de pause (true/false)
+            OnTogglePauseEvent.Raise(isPaused);
         }
+
+        // Debug pour vérifier l'état
+        Debug.Log($"Pause toggled: isPaused = {isPaused}, Time.timeScale = {Time.timeScale}");
+    }
+
+    public void ResumeGame()
+    {
+        // Assure que le jeu reprend directement
+        isPaused = false;
+        PausePanel.SetActive(false);
+        Time.timeScale = 1;
+
+        // Émettre l'événement via le ScriptableObject
+        if (OnTogglePauseEvent != null)
+        {
+            OnTogglePauseEvent.Raise(isPaused);
+        }
+
+        Debug.Log("Game resumed");
     }
 
     public void ReloadLevel()
