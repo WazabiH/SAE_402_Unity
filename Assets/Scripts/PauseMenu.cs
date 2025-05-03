@@ -10,7 +10,7 @@ public class PauseMenu : MonoBehaviour
 
     void Start()
     {
-        // Assure que le jeu commence avec le menu pause désactivé et le temps actif
+        // Assure que le jeu commence sans être en pause
         PausePanel.SetActive(false);
         Time.timeScale = 1;
         isPaused = false;
@@ -18,40 +18,41 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        // Gestion de la touche "Escape" pour activer/désactiver le menu pause
+        // Vérifie si la touche "Escape" a été pressée
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Debug.Log("Escape key pressed, toggling pause...");
             TogglePause();
         }
     }
 
     public void TogglePause()
     {
-        // Inverse l'état de pause
+        // Synchronise l'état de pause
         isPaused = !isPaused;
 
-        // Synchronise l'état du panneau et du temps
+        // Met à jour l'état du panneau pause et du temps
         PausePanel.SetActive(isPaused);
         Time.timeScale = isPaused ? 0 : 1;
 
-        // Émettre l'événement via le ScriptableObject
+        // Émet l'événement via le ScriptableObject
         if (OnTogglePauseEvent != null)
         {
             OnTogglePauseEvent.Raise(isPaused);
         }
 
-        // Debug pour vérifier l'état
-        Debug.Log($"Pause toggled: isPaused = {isPaused}, Time.timeScale = {Time.timeScale}");
+        // Debug pour suivre l'état
+        Debug.Log($"Pause Toggled: isPaused = {isPaused}, Time.timeScale = {Time.timeScale}");
     }
 
     public void ResumeGame()
     {
-        // Assure que le jeu reprend directement
+        // Assure que tout est désactivé correctement
         isPaused = false;
         PausePanel.SetActive(false);
         Time.timeScale = 1;
 
-        // Émettre l'événement via le ScriptableObject
+        // Émet l'événement via le ScriptableObject
         if (OnTogglePauseEvent != null)
         {
             OnTogglePauseEvent.Raise(isPaused);
@@ -62,14 +63,14 @@ public class PauseMenu : MonoBehaviour
 
     public void ReloadLevel()
     {
-        // Reprendre le temps avant de recharger la scène
+        // Reprend le temps avant de recharger la scène
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void LoadMainMenu()
     {
-        // Reprendre le temps avant de charger la scène du menu principal
+        // Reprend le temps avant de charger le menu principal
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
     }
