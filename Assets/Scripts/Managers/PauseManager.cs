@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
@@ -32,11 +33,11 @@ public class PauseManager : MonoBehaviour
     }
 
     public void Resume()
-    {
-        Time.timeScale = 1f;
-        onTogglePauseEvent.Raise(false);
-        pauseMenuUI.SetActive(false);
-    }
+{
+    Time.timeScale = 1f;
+    onTogglePauseEvent.Raise(false);
+    pauseMenuUI.SetActive(false);
+}
 
     void Pause(bool displayPauseMenuUI = true)
     {
@@ -74,8 +75,21 @@ public class PauseManager : MonoBehaviour
         }
     }
 
+     public void LoadMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu"); 
+    }
+
+    public void ResetLevel()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
+    }
+
     private void OnDisable()
     {
         onDebugConsoleOpenEvent.OnEventRaised -= TogglePauseDebug;
     }
 }
+ 
