@@ -3,9 +3,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     public Animator animator;
-
     public SpriteRenderer sr;
-
     public PlayerInvulnerable playerInvulnerable;
 
     [Tooltip("Please uncheck it on production")]
@@ -20,12 +18,16 @@ public class PlayerHealth : MonoBehaviour
     [Header("Broadcast event channels")]
     public VoidEventChannel onPlayerDeath;
 
+    [Header("UI")]
+    public HealthBar healthBar;   // ← ajout
+
     private void Awake()
     {
         if (needResetHP || playerData.currentHealth <= 0)
-        {
             playerData.currentHealth = playerData.maxHealth;
-        }
+
+        // Initialise la barre au max
+        healthBar.SetMathHealth((int)playerData.maxHealth);
     }
 
     private void OnEnable()
@@ -35,17 +37,19 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (playerInvulnerable.isInvulnerable && damage < float.MaxValue) return;
+        if (playerInvulnerable.isInvulnerable && damage < float.MaxValue) 
+            return;
 
+        // Applique les dégâts
         playerData.currentHealth -= damage;
+
+        // ← Mets à jour la barre après les dégâts
+        healthBar.SetHealth((int)playerData.currentHealth);
+
         if (playerData.currentHealth <= 0)
-        {
             Die();
-        }
         else
-        {
             StartCoroutine(playerInvulnerable.Invulnerable());
-        }
     }
 
     private void Die()
