@@ -30971,7 +30971,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   checkDistance: 0.1
-  playerMovement: {fileID: 0}
+  playerMovement: {fileID: 814072445}
 --- !u!114 &814072445
 MonoBehaviour:
   m_ObjectHideFlags: 0
