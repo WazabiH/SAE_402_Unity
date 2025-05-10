@@ -30003,7 +30003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bc2d: {fileID: 722609057}
-  lastCheckpointPosition: {fileID: 0}
+  lastCheckpointPosition: {fileID: 11400000, guid: d51dadea9cf22054696f81e6792e5ff0, type: 2}
 --- !u!61 &722609057
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -55640,7 +55640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bc2d: {fileID: 1263604276}
-  lastCheckpointPosition: {fileID: 0}
+  lastCheckpointPosition: {fileID: 11400000, guid: d51dadea9cf22054696f81e6792e5ff0, type: 2}
 --- !u!61 &1263604276
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -61896,7 +61896,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2, y: -2}
+  m_AnchoredPosition: {x: 2, y: -2.000061}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1648163595
@@ -65502,7 +65502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bc2d: {fileID: 2046488349}
-  lastCheckpointPosition: {fileID: 0}
+  lastCheckpointPosition: {fileID: 11400000, guid: d51dadea9cf22054696f81e6792e5ff0, type: 2}
 --- !u!61 &2046488349
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -67397,7 +67397,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4327952917441872136, guid: 92bac9f893f07004597c7c071c3c0d9a, type: 3}
       propertyPath: nextLevelName
-      value: Debug
+      value: Level2
       objectReference: {fileID: 0}
     - target: {fileID: 4327952917441872138, guid: 92bac9f893f07004597c7c071c3c0d9a, type: 3}
       propertyPath: m_RootOrder
