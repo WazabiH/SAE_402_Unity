@@ -5,7 +5,7 @@ public class BlocHit : MonoBehaviour
 {
     [Header("Animation & Visuels")]
     public Animator animator;
-    public Sprite disabledSprite;       // sprite « cassé » fghgfhfghfg
+    public Sprite disabledSprite;       // sprite « cassé »
 
     [Header("Gameplay")]
     public int numberHit = 2;           // nombre de pommes à donner
