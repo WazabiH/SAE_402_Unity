@@ -18,7 +18,6 @@ public class Collectible : MonoBehaviour
     private void Awake()
     {
         spriteRenderer.sprite = data.sprite;
-
         startAngle = transform.eulerAngles;
     }
 
@@ -38,13 +37,18 @@ public class Collectible : MonoBehaviour
 
     public void Picked()
     {
+        // spawn effect
         GameObject effect = Instantiate(collectedEffect, transform.position, transform.rotation);
-        // Destroy effect after its animation ends playing
         Destroy(effect, effect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
 
+        // update data and events
         data.PickItem(transform.position);
         onPickUp?.Invoke();
 
-        Destroy(gameObject);
+        // instead of destroying, just deactivate
+        spriteRenderer.enabled = false;
+        var col = GetComponent<Collider2D>();
+        if (col != null) col.enabled = false;
+        gameObject.SetActive(false);
     }
 }
