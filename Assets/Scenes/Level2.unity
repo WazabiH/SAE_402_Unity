@@ -30865,7 +30865,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2278611025282210046, guid: 7c9bc11a67e68714e9dc86e90c14b398, type: 3}
       propertyPath: m_Name
-      value: Idle_0
+      value: Box
       objectReference: {fileID: 0}
     - target: {fileID: 6010162498704401484, guid: 7c9bc11a67e68714e9dc86e90c14b398, type: 3}
       propertyPath: sr
